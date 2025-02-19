@@ -42,7 +42,7 @@ public class DeleteClass {                                                      
                 try {
                     Connection connection = DriverManager.getConnection("jdbc:sqlite:InventManagement.db");         // Local database ConnectionDB Driver code
                     System.out.println("* ---------------------------------------------------- *");
-                    System.out.println("|      --- Connection to data-base successful! ---     |");                          // Display message for user
+                    System.out.println("|      --- Connection to data-base successful! ---     |");                     // Display message for user
                     System.out.println("* ---------------------------------------------------- *");
 
                     String sqlReadInventory = "SELECT * from Inventory WHERE item_ID =" + item_ID;                      // SQL Statement Table SELECT and row (WHERE)
@@ -78,22 +78,25 @@ public class DeleteClass {                                                      
                         String oppTypeDelete = "Delete Record";                                                         // Setting the ' TYPE ' of action being preformed
                         String outCome = "PASS";                                                                        // Variable to indicate Transaction success
                         // trnsID needs to auto increment *****                                                         // Calling transactionUpdate() Method - To update database
-                        connection.close();                                                                             // Close DB ConnectionDB to make way for transactionUpdate() DB ConnectionDB
+                        connection.close();                                                                             // Close DB Connection to make way for transactionUpdate()
                         TransactionUpdate.Update(itemDesc, unitPrice, quantitySold, itemQuantity, oppTypeDelete, outCome);
                     }
 
                     else {
-                        System.out.println("|            --- Failed to delete record! ---          |");                               // Display user message
+                        System.out.println("|            --- Failed to delete record! ---          |");                 // Display user message
                         String oppTypeDelete = "Delete Record";                                                         // Setting the ' TYPE ' of action being preformed
                         String outCome = "FAIL";                                                                        // Variable to indicate Transaction failure
                         // trnsID needs to auto increment *****                                                         // Calling transactionUpdate() Method - To update database
-                        connection.close();                                                                             // Close DB ConnectionDB to make way for transactionUpdate() DB ConnectionDB
+                        connection.close();                                                                             // Close DB ConnectionDB to make way for transactionUpdate()
                         TransactionUpdate.Update(itemDesc, unitPrice, quantitySold, itemQuantity, oppTypeDelete, outCome);    // Calling transactionUpdate.update() Method - To update database
                     }
 
             } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
+
+                Delete();                                                                                               // Return to delete() method menu
+
             }                                                                                                           // Switch case 1 end
                 case 2: {
                     System.out.println("* ---------------------------------------------------- *");

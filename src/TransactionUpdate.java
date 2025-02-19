@@ -32,13 +32,12 @@ public class TransactionUpdate {                                                
 
             if (checkUpdateTrns > 0) {                                                                                   // Using 'if' logic when record addition was successful
                 System.out.println("|   --- Transaction has been updated successfully! --- |");                          // Display user message
+                connection.close();                                                                                      // Close DB Connection to make way for transactionUpdate()
                 MainBuild.home();                                                                                        // Return back to home() due to record success
             }
             else {
                 System.out.println("|     --- Failed to update Transaction! --- ");                                      // Display user message
-                    /* This is not quite correct as the Inventory has been changed but the transaction to show
-                     it could fail which is an incorrect order of operations - Further Thought required -
-                     */
+                connection.close();                                                                                      // Close DB Connection to make way for transactionUpdate()
                 MainBuild.home();                                                                                        // Return back to home()
             }
 
