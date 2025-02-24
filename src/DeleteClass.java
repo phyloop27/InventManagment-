@@ -9,7 +9,7 @@ public class DeleteClass {                                                      
     static void Delete() {                                                                                              // Start of delete() method
         Scanner deleteNumber = new Scanner(System.in);                                                                  // Creation of scanner object ' deleteInt '
         PreparedStatement preparedStmt;                                                                                 // Initialise prepared statement ' preparedStmt '
-        int userIn_6;                                                                                                   // Initialise variable ' userIn_6 '
+        int userIn_5;                                                                                                   // Initialise variable ' userIn_5 '
         ResultSet rSet;                                                                                                 // Initialise resultSet
 
         int item_ID;                                                                                                    // Declaring variables for use
@@ -31,10 +31,10 @@ public class DeleteClass {                                                      
                         + "* ---------------------------------------------------- * ");                                 // Main display to user end -
 
         System.out.print("|   Enter selection: ");                                                                      // Prompting the user for input
-        userIn_6 = deleteNumber.nextInt();                                                                              // Storing user input in variable ' userIn_6 '
+        userIn_5 = deleteNumber.nextInt();                                                                              // Storing user input in variable ' userIn_5 '
         System.out.println("* ---------------------------------------------------- *");
 
-        switch(userIn_6) {
+        switch(userIn_5) {
             case 1: {
                 System.out.print("|   1.  Enter record ID to be deleted:  ");                                           // Prompt user for input
                 item_ID = deleteNumber.nextInt();                                                                       // Store user input in variable ' UPitemID '
@@ -104,6 +104,10 @@ public class DeleteClass {                                                      
                     System.out.println("* ---------------------------------------------------- *");
                     MainBuild.home();
             }                                                                                                           // Switch case 2 end
+            default:
+                System.out.print("Invalid selection, please try again");
+                Delete();
+                break;
         }                                                                                                               // Switch statment end
     }                                                                                                                   // delete() method end
 }                                                                                                                       // DeleteClass() end

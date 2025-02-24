@@ -68,7 +68,8 @@ public class CreateClass {                                                      
                 break;
             }
             default: {                                                                                                  // Default switch case is ALWAYS Executed
-                System.out.print("<<< NEED TO ADD A ' CLEAR SCREEN FUNCTION ' HERE >>> ");
+                System.out.print("Invalid input, please try again!");
+                create();
             }
         }                                                                                                               // End of switch
 

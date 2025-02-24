@@ -52,7 +52,8 @@ public class MainBuild {                                                        
                 System.exit(0);                                                                                   // Code to terminate program
             }
             default: {                                                                                                   // Default switch case is ALWAYS Executed
-                System.out.print("<<< NEED TO ADD A ' CLEAR SCREEN FUNCTION ' HERE >>> ");
+                System.out.print("Invalid answer, please try again! ");
+                MainBuild.home();
                 break;                                                                                                   // ' break ' out of switch statement
             }
         }                                                                                                               // End of switch statement

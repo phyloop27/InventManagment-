@@ -167,6 +167,7 @@ public class UpdateClass {                                                      
                 } catch (
                         Exception e) {                                                                                  // Catch block for errors and exceptions
                     throw new RuntimeException(e);
+                    update();
                 }
             }                                                                                                           // End of Switch case 1 -
 
@@ -179,6 +180,10 @@ public class UpdateClass {                                                      
                 System.out.println("|   Returning to main menu");                                                       // User display
                 MainBuild.home();                                                                                       // Return to MainBuild.home() Class & Method - Main menu
             }                                                                                                           // End of switch case 3
+            default:
+                System.out.print("Invalid input, please try again");
+                update();
+                break;
 
         }                                                                                                               // End of switch
     }                                                                                                                   // End of update() method

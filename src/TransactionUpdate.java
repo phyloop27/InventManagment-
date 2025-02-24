@@ -3,7 +3,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-
 public class TransactionUpdate {                                                                                        // Declare & start of Class
 
     public static void Update(String itemDesc, double unitPrice, float quantitySold, double itemQuantity, String oppTypeUpdate, String outCome) {
@@ -42,6 +41,7 @@ public class TransactionUpdate {                                                
             }
 
         } catch (SQLException e) {                                                                                       // Error catching -
+            System.out.print("Fater error, please contact system administrator!");
             throw new RuntimeException(e);                                                                               // Error Throwing -
         }
     }
