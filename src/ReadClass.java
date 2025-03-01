@@ -1,4 +1,5 @@
 import java.sql.*;                                                                                                      // Import SQL package's (all)
+import java.util.InputMismatchException;
 import java.util.Scanner;                                                                                               // Import utility package, Scanner Class
 
 public class ReadClass {                                                                                                // Declare & start of Class
@@ -33,8 +34,9 @@ public class ReadClass {                                                        
                 + "|   3. EXIT TO MAIN MENU                               | \n"
                 + "* ---------------------------------------------------- * ");                                         // Main display to user end -
 
-        System.out.print("|   Enter selection: ");                                                                      // Prompting the user for input
-        userIn_3 = readInt.nextInt();                                                                                   // Storing user input in variable ' userIn_3 '
+        try {                                                                                                           // Wrap in try/catch block - data missMatch excp -
+            System.out.print("|   Enter selection: ");                                                                  // Prompting the user for input
+            userIn_3 = readInt.nextInt();                                                                               // Storing user input in variable ' userIn_3 '
 
         switch(userIn_3) {
             case 1: {
@@ -93,9 +95,10 @@ public class ReadClass {                                                        
 
                 catch (SQLException e) {                                                                                // In-case of try failure -
                     System.out.println("|            --- Connection to database failed! ---      |");                   // Display message for user
-                    throw new RuntimeException(e);                                                                      // Exception thrown
+                    read();                                                                                             // Return to read() main menu
                 }
             }
+
             case 2: {
                 try {                                                                                                   // Use of try block in case of error connecting
                     Connection connection = DriverManager.getConnection("jdbc:sqlite:InventManagement.db");         // Local database Connection
@@ -163,6 +166,15 @@ public class ReadClass {                                                        
                 System.out.println("|           --- Exiting to Main Menu ---               |");                         // Display User message
                 MainBuild.home();                                                                                       // Calling home() method to return to home menu
             }
+
+            default:
+                System.out.println("Please eneter a valid choice!");
+                read();
         }                                                                                                               // End of switch statement
+
+        } catch (InputMismatchException e) {                                                                            // Catch block start -
+            System.out.print("Please enter your choice using digets (1 - 3");
+            read();
+        }                                                                                                               // End of Catch -
     }                                                                                                                   // End of read() method
-}
+}                                                                                                                       // End of ReadClass

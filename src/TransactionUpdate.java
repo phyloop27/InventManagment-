@@ -17,7 +17,7 @@ public class TransactionUpdate {                                                
                     + "(transactionID, itemDescription, unitPrice, quantitySold, itemQuantity, transactionType, outCome)"
                     + "values (?, ?, ?, ?, ?, ?, ?)";
 
-            PreparedStatement preparedStmt = connection.prepareStatement(sqlTransactionUpdate);                          // Using ConnectionDB to prepare the SQL statement
+            PreparedStatement preparedStmt = connection.prepareStatement(sqlTransactionUpdate);                         // Using ConnectionDB to prepare the SQL statement
 
             //preparedStmt.setInt (1, trnsID);                                                                           // SQL placeholder 1 - transactionID is autoIncremented
             preparedStmt.setString (2, itemDesc);                                                          // SQL placeholder 2, value ' itemDesc ' variable

@@ -63,8 +63,8 @@ public class CreateClass {                                                      
                     quantitySold = 0;                                                                                       // Setting variable value as ' 0 ' for table input value
                     break;                                                                                                  // ' break ' out of switch statement
 
-                } catch(InputMismatchException e) {
-                    System.out.print("Please enter a valid data type");
+                } catch (InputMismatchException e) {
+                    System.out.print("Please enter a valid data type, please try again!");
                     create();
                 }
             }

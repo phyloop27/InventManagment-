@@ -1,8 +1,9 @@
-import java.sql.Connection;
+import java.sql.Connection;                                                                                             // Import required Java Packages
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Scanner;
+import java.util.InputMismatchException;
+import java.util.Scanner;                                                                                               // Java package import end
 
 public class UpdateClass {                                                                                              // Declare & start of Class
     public static void main(String[] args) {                                                                            // Start of Main Method
@@ -47,6 +48,7 @@ public class UpdateClass {                                                      
                 + "|   3. EXIT TO MAIN MENU                               | \n"
                 + "* ---------------------------------------------------- * ");                                         // Display message end
 
+        try {
         System.out.print("|   Enter selection: ");                                                                      // Prompting the user for input
         userIn_4 = updateNumber.nextInt();                                                                              // Storing user input in variable
 
@@ -57,24 +59,24 @@ public class UpdateClass {                                                      
              */
             case 1: {
                         // Should be a five-digit number but database only holds incremental values so far for ID
-                        System.out.print("|   1.  Enter record ID to be updated:  ");                                           // Prompt user for input
-                        UPitemID = updateNumber.nextInt();                                                                      // Store user input in variable ' UPitemID '
+                        System.out.print("|   1.  Enter record ID to be updated:  ");                                   // Prompt user for input
+                        UPitemID = updateNumber.nextInt();                                                              // Store user input in variable ' UPitemID '
 
-                        System.out.print("|   2. Enter new item description (Text): ");                                         // Prompt user for input
-                        UPitemDesc = updateText.nextLine();                                                                     // Store user input in variable ' UPitemDesc '
+                        System.out.print("|   2. Enter new item description (Text): ");                                 // Prompt user for input
+                        UPitemDesc = updateText.nextLine();                                                             // Store user input in variable ' UPitemDesc '
 
-                        System.out.print("|   3. Enter new item prince (£0.00): ");                                             // Prompt user for input
-                        UPunitPrice = updateNumber.nextDouble();                                                                // Store user input in variable ' UPunitPrice '
+                        System.out.print("|   3. Enter new item prince (£0.00): ");                                     // Prompt user for input
+                        UPunitPrice = updateNumber.nextDouble();                                                        // Store user input in variable ' UPunitPrice '
 
-                        System.out.print("|   4. Enter quantity sold (00.00):");                                                // Prompt user for input
-                        UPquantitySold = updateNumber.nextFloat();                                                              // Store user input in variable ' UPquantitySold '
+                        System.out.print("|   4. Enter quantity sold (00.00):");                                        // Prompt user for input
+                        UPquantitySold = updateNumber.nextFloat();                                                      // Store user input in variable ' UPquantitySold '
 
-                        System.out.print("|   5. Enter new item quantity (0.00): ");                                            // Prompt user for input
-                        UPitemQuantity = updateNumber.nextDouble();                                                             // Store user input in variable ' UPitemQuantity '
+                        System.out.print("|   5. Enter new item quantity (0.00): ");                                    // Prompt user for input
+                        UPitemQuantity = updateNumber.nextDouble();                                                     // Store user input in variable ' UPitemQuantity '
 
-                        System.out.print("|   6. Total unit value is calculated automatically ");                               // Prompt user for input
-                        UPitemTotValue = (UPunitPrice * UPitemQuantity);                                                        // Calculate variable ' UPitemTotValue '
-                        System.out.println(" ");                                                                                // Display spacer
+                        System.out.print("|   6. Total unit value is calculated automatically ");                       // Prompt user for input
+                        UPitemTotValue = (UPunitPrice * UPitemQuantity);                                                // Calculate variable ' UPitemTotValue '
+                        System.out.println(" ");                                                                         // Display spacer
 
                 /*
                 Pulling records from the database and assigning them to variables to be updated with the already received
@@ -82,9 +84,9 @@ public class UpdateClass {                                                      
                 */
 
                 try {                                                                                                   // Use of try block in case of error connecting
-                    Connection connection = DriverManager.getConnection("jdbc:sqlite:InventManagement.db");         // Local database ConnectionDB Driver code
+                    Connection connection = DriverManager.getConnection("jdbc:sqlite:InventManagement.db");             // Local database ConnectionDB Driver code
                     System.out.println("* ---------------------------------------------------- *");
-                    System.out.println("|      --- Connection to data-base successful! ---     |");                          // Display message for user
+                    System.out.println("|      --- Connection to data-base successful! ---     |");                     // Display message for user
                     System.out.println("* ---------------------------------------------------- *");
 
                     String sqlReadInventory = "SELECT * from Inventory WHERE item_ID =" + UPitemID;                     // SQL Statement Table SELECT and row (WHERE)
@@ -150,7 +152,7 @@ public class UpdateClass {                                                      
                     int checkUpdateRecord = preparedStmtValues.executeUpdate();                                         // Code to check whether the record being added was a success
 
                     if (checkUpdateRecord > 0) {                                                                        // Using 'if' logic when record addition was successful
-                        System.out.println("|     --- Record has been updated successfully! ---    |");                      // Display user message
+                        System.out.println("|     --- Record has been updated successfully! ---    |");                 // Display user message
                         String oppTypeCreate = "Update Record";                                                         // Setting the ' TYPE ' of action being preformed
                         String outCome = "PASS";                                                                        // Variable to indicate Transaction success
                         // trnsID needs to auto increment *****                                                         // Calling transactionUpdate.update() Method - To update database
@@ -164,14 +166,14 @@ public class UpdateClass {                                                      
                         connection.close();                                                                             // Close DB ConnectionDB to make way for transactionUpdate() DB ConnectionDB
                         TransactionUpdate.Update(itemDesc, unitPrice, quantitySold, itemQuantity, oppTypeCreate, outCome);  // Passing values to Update() method for DB update
                     }
-
+/* This code is never executed ----
                     System.out.println("| ");                                                                           // Display spacer
                     UpdateClass.update();                                                                               // Return to update() method menu
-
+*/
                 }
                 catch (Exception e) {                                                                                   // Catch block for errors and exceptions
                     System.out.print("A Runtime Eroor has occured - Restart");                                          // Display message to user
-                    //throw new RuntimeException(e);                                                                    // Throws error - Replaced to catch Exception
+                    //throw new RuntimeException(e);                                                                    // Throws error - Replaced to catch Exception - Unrequired
                     UpdateClass.update();                                                                               // Returns flow control back to update start menu
                 }
             }                                                                                                           // End of Switch case 1 -
@@ -184,12 +186,17 @@ public class UpdateClass {                                                      
             case 3: {
                 System.out.println("|   Returning to main menu");                                                       // User display
                 MainBuild.home();                                                                                       // Return to MainBuild.home() Class & Method - Main menu
-            }                                                                                                           // End of switch case 3
-            default:
-                System.out.print("Invalid input, please try again");
-                UpdateClass.update();
-                break;
+           }                                                                                                            // End of switch case 3
 
+            default:
+                System.out.print("Invalid input, please try again");                                                    // Ivalid input given by user
+                UpdateClass.update();                                                                                   // Restart & return to update() menu
+                break;
         }                                                                                                               // End of switch
+
+        } catch (InputMismatchException e) {                                                                            // Catch block start -
+            System.out.print("Please enter your choice using digets (1 - 3");                                           // Display message to user
+            update();                                                                                                   // Restart & return to update() menu
+        }
     }                                                                                                                   // End of update() method
-}                                                                                                                       // End of TransactionUpdate.update() Class
+}                                                                                                                       // End of Update Class

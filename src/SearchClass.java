@@ -1,4 +1,5 @@
 import java.sql.*;                                                                                                      // Import SQL package's (all)
+import java.util.InputMismatchException;
 import java.util.Scanner;                                                                                               // Import utility package, Scanner Class
 
 public class SearchClass {                                                                                              // Declare & start of Class
@@ -35,10 +36,9 @@ public class SearchClass {                                                      
                         + "|   3. EXIT TO MAIN MENU                               | \n"
                         + "* ---------------------------------------------------- * ");                                 // Main display to user end -
 
+        try {                                                                                                           // Use f try & catch for Data missMatch errors
         System.out.print("|   Enter selection: ");                                                                      // Prompting the user for input for menu selection
         userIn_6 = searchNumber.nextInt();                                                                              // Storing user input in variable ' userIn_6 '
-
-
 
         switch (userIn_6) {
             case 1: {
@@ -104,7 +104,7 @@ public class SearchClass {                                                      
                     throw new RuntimeException(e);                                                                      // Exception thrown
                 }
                 search();                                                                                               // Return to seach() menu
-            }
+            }                                                                                                           // Switch case 1 end
 
             case 2: {
                 try {                                                                                                   // Use of try block in case of error connecting
@@ -159,23 +159,33 @@ public class SearchClass {                                                      
                         TransactionUpdate.Update(itemDesc, unitPrice, quantitySold, itemQuantity, oppTypeRead, outCome);         // Calling transactionUpdate() Method - To update database
 
                     }
-
+/* This code is never executed ---------------
                     connection.close();                                                                                 // Closing connection to free up resources to database
                     System.out.println("| ");                                                                           // Display spacer
                     search();                                                                                           // calling search() Method to return to sub-menu
-
-                } catch (
-                        SQLException e) {                                                                                // In-case of try failure -
+*/
+                } catch (SQLException e) {                                                                              // In-case of try failure -
                     System.out.println("|   --- Connection to database failed! --- ");                                  // Display message for user
                     throw new RuntimeException(e);                                                                      // Exception thrown
                 }
-            }
+            }                                                                                                           // Switch case 2 end
+
             case 3: {
                 System.out.println("* ---------------------------------------------------- * ");
                 System.out.println("|           --- Exiting to Main Menu ---               |");                         // Display User message
                 MainBuild.home();                                                                                       // Calling home() method to return to home menu
             }
 
-        }                                                                                                               // End of switch statement
+            default:                                                                                                    // To catch any non-given options for use
+                System.out.print("Invalid selection, please try again");                                                // User display message
+                search();                                                                                               // Return to search() main menu
+                break;
+        }                                                                                                               // Switch statment end
+
+        } catch (
+                InputMismatchException e) {                                                                             // Catch block start -
+            System.out.print("   Please enter your choice using digets (1 - 3): ");                                     // Display message to user
+            search();                                                                                                   // Restart & return to Delete() menu
+        }
     }                                                                                                                   // End of main mathod
 }                                                                                                                       // End of Class

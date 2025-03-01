@@ -1,4 +1,5 @@
 import java.sql.*;                                                                                                      // Import SQL package (all)
+import java.util.InputMismatchException;
 import java.util.Scanner;                                                                                               // Import utility package, Scanner Class
 
 public class DeleteClass {                                                                                              // Declare & start of Class
@@ -21,7 +22,7 @@ public class DeleteClass {                                                      
         double itemTotValue;
 
         System.out.println(
-                         "* ---------------------------------------------------- * \n"                                 // Main display to user -
+                         "* ---------------------------------------------------- * \n"                                  // Main display to user -
                         + "|         --- Delete Record(s) selected ---            | \n"
                        // + "|               --- DELETE METHOD ---                  | \n"                               // Used for testing purpuses ( For ease )
                         + "|------------------------------------------------------| \n"
@@ -30,6 +31,7 @@ public class DeleteClass {                                                      
                         + "|   2. EXIT TO MAIN MENU                               | \n"
                         + "* ---------------------------------------------------- * ");                                 // Main display to user end -
 
+        try {
         System.out.print("|   Enter selection: ");                                                                      // Prompting the user for input
         userIn_5 = deleteNumber.nextInt();                                                                              // Storing user input in variable ' userIn_5 '
         System.out.println("* ---------------------------------------------------- *");
@@ -73,8 +75,8 @@ public class DeleteClass {                                                      
 
                     int checkUpdateRecord = preparedStmt.executeUpdate();                                               // Code to check whether the record being added was a success
 
-                    if (checkUpdateRecord < 1) {                                                                       // Using 'if' logic when record addition was successful
-                        System.out.println("|     --- Record has been deleted successfully! ---    |");                    // Display user message
+                    if (checkUpdateRecord < 1) {                                                                        // Using 'if' logic when record addition was successful
+                        System.out.println("|     --- Record has been deleted successfully! ---    |");                 // Display user message
                         String oppTypeDelete = "Delete Record";                                                         // Setting the ' TYPE ' of action being preformed
                         String outCome = "PASS";                                                                        // Variable to indicate Transaction success
                         // trnsID needs to auto increment *****                                                         // Calling transactionUpdate() Method - To update database
@@ -109,5 +111,12 @@ public class DeleteClass {                                                      
                 Delete();
                 break;
         }                                                                                                               // Switch statment end
-    }                                                                                                                   // delete() method end
+
+        } catch (
+                InputMismatchException e) {                                                                            // Catch block start -
+            System.out.print("   Please enter your choice using digets (1 - 3): ");                                     // Display message to user
+            Delete();                                                                                                   // Restart & return to Delete() menu
+        }
+
+    }                                                                                                                   // Delete() method end
 }                                                                                                                       // DeleteClass() end
