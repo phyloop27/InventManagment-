@@ -73,7 +73,7 @@ public class DeleteClass {                                                      
 
                     int checkUpdateRecord = preparedStmt.executeUpdate();                                               // Code to check whether the record being added was a success
 
-                    if (checkUpdateRecord == 1) {                                                                       // Using 'if' logic when record addition was successful
+                    if (checkUpdateRecord < 1) {                                                                       // Using 'if' logic when record addition was successful
                         System.out.println("|     --- Record has been deleted successfully! ---    |");                    // Display user message
                         String oppTypeDelete = "Delete Record";                                                         // Setting the ' TYPE ' of action being preformed
                         String outCome = "PASS";                                                                        // Variable to indicate Transaction success

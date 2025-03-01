@@ -1,5 +1,8 @@
-import java.sql.*;                                                                                                      // Import SQL package (all)
-import java.util.Scanner;                                                                                               // Import utility package, Scanner Class
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Scanner;
 
 public class UpdateClass {                                                                                              // Declare & start of Class
     public static void main(String[] args) {                                                                            // Start of Main Method
@@ -30,6 +33,7 @@ public class UpdateClass {                                                      
         float quantitySold;                                                                                             // 'Float' value to represent quantity Sold
         double itemQuantity;                                                                                            // 'Double' value to represent an items quantity
         double itemTotValue;                                                                                            // 'Double' variable to represent item's in stock total value
+        boolean exit;
 
 
         System.out.println(
@@ -52,25 +56,25 @@ public class UpdateClass {                                                      
             and store the information given in Temporary variables.
              */
             case 1: {
-                // Should be a five-digit number but database only holds incremental values so far for ID
-                System.out.print("|   1.  Enter record ID to be updated:  ");                                           // Prompt user for input
-                UPitemID = updateNumber.nextInt();                                                                      // Store user input in variable ' UPitemID '
+                        // Should be a five-digit number but database only holds incremental values so far for ID
+                        System.out.print("|   1.  Enter record ID to be updated:  ");                                           // Prompt user for input
+                        UPitemID = updateNumber.nextInt();                                                                      // Store user input in variable ' UPitemID '
 
-                System.out.print("|   2. Enter new item description (Text): ");                                         // Prompt user for input
-                UPitemDesc = updateText.nextLine();                                                                     // Store user input in variable ' UPitemDesc '
+                        System.out.print("|   2. Enter new item description (Text): ");                                         // Prompt user for input
+                        UPitemDesc = updateText.nextLine();                                                                     // Store user input in variable ' UPitemDesc '
 
-                System.out.print("|   3. Enter new item prince (£0.00): ");                                             // Prompt user for input
-                UPunitPrice = updateNumber.nextDouble();                                                                // Store user input in variable ' UPunitPrice '
+                        System.out.print("|   3. Enter new item prince (£0.00): ");                                             // Prompt user for input
+                        UPunitPrice = updateNumber.nextDouble();                                                                // Store user input in variable ' UPunitPrice '
 
-                System.out.print("|   4. Enter quantity sold (00.00):");                                                // Prompt user for input
-                UPquantitySold = updateNumber.nextFloat();                                                              // Store user input in variable ' UPquantitySold '
+                        System.out.print("|   4. Enter quantity sold (00.00):");                                                // Prompt user for input
+                        UPquantitySold = updateNumber.nextFloat();                                                              // Store user input in variable ' UPquantitySold '
 
-                System.out.print("|   5. Enter new item quantity (0.00): ");                                            // Prompt user for input
-                UPitemQuantity = updateNumber.nextDouble();                                                             // Store user input in variable ' UPitemQuantity '
+                        System.out.print("|   5. Enter new item quantity (0.00): ");                                            // Prompt user for input
+                        UPitemQuantity = updateNumber.nextDouble();                                                             // Store user input in variable ' UPitemQuantity '
 
-                System.out.print("|   6. Total unit value is calculated automatically ");                               // Prompt user for input
-                UPitemTotValue = (UPunitPrice * UPitemQuantity);                                                        // Calculate variable ' UPitemTotValue '
-                System.out.println(" ");                                                                                // Display spacer
+                        System.out.print("|   6. Total unit value is calculated automatically ");                               // Prompt user for input
+                        UPitemTotValue = (UPunitPrice * UPitemQuantity);                                                        // Calculate variable ' UPitemTotValue '
+                        System.out.println(" ");                                                                                // Display spacer
 
                 /*
                 Pulling records from the database and assigning them to variables to be updated with the already received
@@ -162,12 +166,13 @@ public class UpdateClass {                                                      
                     }
 
                     System.out.println("| ");                                                                           // Display spacer
-                    update();                                                                                           // Return to update() method menu
+                    UpdateClass.update();                                                                               // Return to update() method menu
 
-                } catch (
-                        Exception e) {                                                                                  // Catch block for errors and exceptions
-                    throw new RuntimeException(e);
-                    update();
+                }
+                catch (Exception e) {                                                                                   // Catch block for errors and exceptions
+                    System.out.print("A Runtime Eroor has occured - Restart");                                          // Display message to user
+                    //throw new RuntimeException(e);                                                                    // Throws error - Replaced to catch Exception
+                    UpdateClass.update();                                                                               // Returns flow control back to update start menu
                 }
             }                                                                                                           // End of Switch case 1 -
 
@@ -182,7 +187,7 @@ public class UpdateClass {                                                      
             }                                                                                                           // End of switch case 3
             default:
                 System.out.print("Invalid input, please try again");
-                update();
+                UpdateClass.update();
                 break;
 
         }                                                                                                               // End of switch

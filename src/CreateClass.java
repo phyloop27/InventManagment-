@@ -1,4 +1,5 @@
 import java.sql.*;                                                                                                      // Import SQL package (all)
+import java.util.InputMismatchException;
 import java.util.Scanner;                                                                                               // Import utility package, Scanner Class
 
 public class CreateClass {                                                                                              // Declare & start of Class
@@ -36,11 +37,12 @@ public class CreateClass {                                                      
 
         switch (userIn_2) {                                                                                             // future use
             case 1: {
-                System.out.println("|   1. -- Item ID is auto assigned  ");                                             // Prompt user for input
-                //itemID = createNumber.nextInt();                                                                      // Store user input in variable ' itemID '
+                try {
+                    System.out.println("|   1. -- Item ID is auto assigned  ");                                             // Prompt user for input
+                    //itemID = createNumber.nextInt();                                                                      // Store user input in variable ' itemID '
 
-                System.out.print("|   2. Enter new item description: ");                                                // Prompt user for input
-                itemDesc = createText.nextLine();                                                                       // Store user input in variable ' itemDesc
+                    System.out.print("|   2. Enter new item description: ");                                                // Prompt user for input
+                    itemDesc = createText.nextLine();                                                                       // Store user input in variable ' itemDesc
 
                  /*
                  Use nextLine() NOT next() :
@@ -48,18 +50,23 @@ public class CreateClass {                                                      
                  next() only returns the first word
                  */
 
-                System.out.print("|   3. Enter new item prince (£0.00): ");                                             // Prompt user for input
-                unitPrice = createNumber.nextDouble();                                                                  // Store user input in variable ' unitPrice '
+                    System.out.print("|   3. Enter new item prince (£0.00): ");                                             // Prompt user for input
+                    unitPrice = createNumber.nextDouble();                                                                  // Store user input in variable ' unitPrice '
 
-                System.out.print("|   4. Enter new item quantity (0.00): ");                                            // Prompt user for input
-                itemQuantity = createNumber.nextDouble();                                                               // Store user input in variable ' itemQuantity '
+                    System.out.print("|   4. Enter new item quantity (0.00): ");                                            // Prompt user for input
+                    itemQuantity = createNumber.nextDouble();                                                               // Store user input in variable ' itemQuantity '
 
-                System.out.print("|   5. Total unit value is calculated automatically ");                               // Prompt user for input
+                    System.out.print("|   5. Total unit value is calculated automatically ");                               // Prompt user for input
 
-                itemTotValue = (unitPrice * itemQuantity);                                                              // Calculate variable ' itemTotValue '
-                System.out.println("| ");                                                                               // Display spacer
-                quantitySold = 0;                                                                                       // Setting variable value as ' 0 ' for table input value
-                break;                                                                                                  // ' break ' out of switch statement
+                    itemTotValue = (unitPrice * itemQuantity);                                                              // Calculate variable ' itemTotValue '
+                    System.out.println("| ");                                                                               // Display spacer
+                    quantitySold = 0;                                                                                       // Setting variable value as ' 0 ' for table input value
+                    break;                                                                                                  // ' break ' out of switch statement
+
+                } catch(InputMismatchException e) {
+                    System.out.print("Please enter a valid data type");
+                    create();
+                }
             }
             case 2: {
                 System.out.println("* ---------------------------------------------------- * ");
