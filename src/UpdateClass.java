@@ -76,7 +76,7 @@ public class UpdateClass {                                                      
 
                         System.out.print("|   6. Total unit value is calculated automatically ");                       // Prompt user for input
                         UPitemTotValue = (UPunitPrice * UPitemQuantity);                                                // Calculate variable ' UPitemTotValue '
-                        System.out.println(" ");                                                                         // Display spacer
+                        System.out.println(" ");                                                                        // Display spacer
 
                 /*
                 Pulling records from the database and assigning them to variables to be updated with the already received
@@ -116,9 +116,9 @@ public class UpdateClass {                                                      
                             " quantity_Sold = ?," +
                             " quantity_of_units = ?," +
                             " total_unit_value = ?" +
-                            " WHERE item_id = ?";                                                                        // SQL Statement (placeholders end) -
+                            " WHERE item_id = ?";                                                                       // SQL Statement (placeholders end) -
 
-                    preparedStmtValues = connection.prepareStatement(sqlUpdateInventory);                                // Using connection to prepare the SQL statement for execution
+                    preparedStmtValues = connection.prepareStatement(sqlUpdateInventory);                               // Using connection to prepare the SQL statement for execution
 
                     preparedStmtValues.setString(1, UPitemDesc);                                                        // SQL placeholder 1 updated variable insert into field
                     preparedStmtValues.setDouble(2, UPunitPrice);                                                       // SQL placeholder 2 updated variable insert into field
@@ -159,43 +159,51 @@ public class UpdateClass {                                                      
                         connection.close();                                                                             // Close DB ConnectionDB to make way for transactionUpdate() DB ConnectionDB
                         TransactionUpdate.Update(itemDesc, unitPrice, quantitySold, itemQuantity, oppTypeCreate, outCome); // Passing values to Update() method for DB update
                     } else {
-                        System.out.println("|        --- Failed to add record! --- ");                                  // Display user message
+                        System.out.println("* ---------------------------------------------------- *");
+                        System.out.println("|              --- Failed to add record! ---           |");                 // Display user message
                         String oppTypeCreate = "Update Record";                                                         // Setting the ' TYPE ' of action being preformed
                         String outCome = "FAIL";                                                                        // Variable to indicate Transaction fail
                         // trnsID needs to auto increment *****                                                         // Calling transactionUpdate.update() Method - To update database
                         connection.close();                                                                             // Close DB ConnectionDB to make way for transactionUpdate() DB ConnectionDB
                         TransactionUpdate.Update(itemDesc, unitPrice, quantitySold, itemQuantity, oppTypeCreate, outCome);  // Passing values to Update() method for DB update
                     }
-/* This code is never executed ----
+
+                /* This code is never executed ---- Remove
                     System.out.println("| ");                                                                           // Display spacer
                     UpdateClass.update();                                                                               // Return to update() method menu
-*/
+                */
+
                 }
                 catch (Exception e) {                                                                                   // Catch block for errors and exceptions
-                    System.out.print("A Runtime Eroor has occured - Restart");                                          // Display message to user
+                    System.out.println("* ---------------------------------------------------- *");                     // Display spacer
+                    System.out.println("|     --- A Runtime Eroor has occured - Restart ---    |");                     // Display message to user
                     //throw new RuntimeException(e);                                                                    // Throws error - Replaced to catch Exception - Unrequired
                     UpdateClass.update();                                                                               // Returns flow control back to update start menu
                 }
             }                                                                                                           // End of Switch case 1 -
 
             case 2: {
-                System.out.println("|   Read Record(s) Selected");                                                      // User display
+                System.out.println("* ---------------------------------------------------- * ");                        // Display spacer
+                System.out.println("|           --- Read Record(s) Selected ---            |");                         // User display
                 ReadClass.read();                                                                                       // Return to ReadClass.read()  Class & Method
             }                                                                                                           // End of switch case 2
 
             case 3: {
-                System.out.println("|   Returning to main menu");                                                       // User display
+                System.out.println("* ---------------------------------------------------- * ");                        // Display spacer
+                System.out.println("|             --- Exiting to Main Menu ---              |");                         // Display User message
                 MainBuild.home();                                                                                       // Return to MainBuild.home() Class & Method - Main menu
            }                                                                                                            // End of switch case 3
 
             default:
-                System.out.print("Invalid input, please try again");                                                    // Ivalid input given by user
+                System.out.println("* ---------------------------------------------------- * ");                        // Display spacer
+                System.out.println("|      --- Invalid selection, please try again ---     |");                         // User message
                 UpdateClass.update();                                                                                   // Restart & return to update() menu
                 break;
         }                                                                                                               // End of switch
 
         } catch (InputMismatchException e) {                                                                            // Catch block start -
-            System.out.print("Please enter your choice using digets (1 - 3");                                           // Display message to user
+            System.out.println("* ---------------------------------------------------- * ");                            // Display spacer
+            System.out.println("|  --- Please enter your choice using digets only ---  |");                              // User message
             update();                                                                                                   // Restart & return to update() menu
         }
     }                                                                                                                   // End of update() method

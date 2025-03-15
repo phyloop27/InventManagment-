@@ -24,7 +24,7 @@ public class ReadClass {                                                        
         int trnsID = 0;
 
         System.out.println(
-                  "* ---------------------------------------------------- * \n"                                           // Main display to user -
+                  "* ---------------------------------------------------- * \n"                                         // Main display to user -
                 + "|            --- Read Record(s) selected ---           | \n"
                 // + "|                --- READ METHOD ---                   | \n"                                      // Used for testing purpuses ( For ease )
                 + "|------------------------------------------------------| \n"
@@ -50,8 +50,8 @@ public class ReadClass {                                                        
                     preparedStmt = connection.prepareStatement(sqlRead);                                                // Using ConnectionDB to prepare the SQL statement
                     rSet = preparedStmt.executeQuery();
 
-                    System.out.println("|     Please see records from the inventory table:     |");                     // Display user message
-                    System.out.println("* ---------------------------------------------------- *  ");                   // Display spacer
+                    System.out.println("|      Please see records from the inventory table     |");                     // Display user message
+                    System.out.println("* ---------------------------------------------------- *");                     // Display spacer
 
                     while (rSet.next()) {                                                                               // Using a ' while ' loop to gather all info from table
                         item_ID = rSet.getInt("item_id");                                                    // Pulling information from the table and storing in variable ' item_ID '
@@ -78,9 +78,10 @@ public class ReadClass {                                                        
                         oppTypeRead = "Read Record";                                                                    // Variable to indicate Record Type Transaction
                         connection.close();                                                                             // Closing connection to free up resources to database
                         TransactionUpdate.Update(itemDesc, unitPrice, quantitySold, itemQuantity, oppTypeRead, outCome);         // Calling transactionUpdate.update() Method - To update database
+                    }
 
-                    } else {
-                        System.out.println("|        --- Failed to read record(s)! --- ");                              // Display user message
+                    else {
+                        System.out.println("|          --- Failed to read record(s)! ---           |");                 // Display user message
                         outCome = "FAIL";                                                                               // Variable to indicate Transaction fail
                         oppTypeRead = "Read Record";                                                                    // Variable to indicate Record Type Transaction
                         connection.close();                                                                             // Closing connection to free up resources to database
@@ -94,7 +95,8 @@ public class ReadClass {                                                        
                 }
 
                 catch (SQLException e) {                                                                                // In-case of try failure -
-                    System.out.println("|            --- Connection to database failed! ---      |");                   // Display message for user
+                    System.out.println("* ---------------------------------------------------- * ");
+                    System.out.println("|         --- Connection to database failed! ---       |");                     // Display message for user
                     read();                                                                                             // Return to read() main menu
                 }
             }
@@ -110,7 +112,7 @@ public class ReadClass {                                                        
                     preparedStmt = connection.prepareStatement(sqlReadTransactions);                                    // Using ConnectionDB to prepare the SQL statement
                     rSet = preparedStmt.executeQuery();
 
-                    System.out.println("|    Please see records from the Transaction Log's:    |");                     // Display user message
+                    System.out.println("|     Please see records from the Transaction Log's    |");                     // Display user message
                     System.out.println("* ---------------------------------------------------- * ");                    // Display spacer
 
                     while (rSet.next()) {                                                                               // Using a ' while ' loop to gather all info from table
@@ -134,7 +136,7 @@ public class ReadClass {                                                        
                     }
 
                     if (trnsID < 0) {                                                                                   // Using 'if' logic when record pull request was successful
-                        System.out.println("|  --- Failed to retrieve record! --- ");                                   // Display user message
+                        System.out.println("|         --- Failed to retrieve record! ---           |");                 // Display user message
                         outCome = "FAIL";                                                                               // Variable to indicate Transaction fail
                         oppTypeRead = "Read Record";                                                                    // Variable to indicate Record Type Transaction
                         connection.close();                                                                             // Closing connection to free up resources to database
@@ -157,23 +159,25 @@ public class ReadClass {                                                        
                 }
 
                 catch (SQLException e) {                                                                                // In-case of try failure -
-                    System.out.println("|   --- Connection to database failed! --- ");                                  // Display message for user
+                    System.out.println("|       --- Connection to database failed! ---         |");                     // Display message for user
                     throw new RuntimeException(e);                                                                      // Exception thrown
                 }
             }
             case 3: {
-                System.out.println("* ---------------------------------------------------- * ");
+                System.out.println("* ---------------------------------------------------- * ");                        // Display spacer
                 System.out.println("|           --- Exiting to Main Menu ---               |");                         // Display User message
                 MainBuild.home();                                                                                       // Calling home() method to return to home menu
             }
 
             default:
-                System.out.println("Please eneter a valid choice!");
+                System.out.println("* ---------------------------------------------------- * ");                        // Display spacer
+                System.out.println("|      --- Invalid selection, please try again ---     |");                         // User message
                 read();
         }                                                                                                               // End of switch statement
 
         } catch (InputMismatchException e) {                                                                            // Catch block start -
-            System.out.print("Please enter your choice using digets (1 - 3");
+            System.out.println("* ---------------------------------------------------- * ");                            // Display spacer
+            System.out.println("|  --- Please enter your choice using digets only ---  |");                             // User message
             read();
         }                                                                                                               // End of Catch -
     }                                                                                                                   // End of read() method

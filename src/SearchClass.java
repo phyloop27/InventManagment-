@@ -39,6 +39,7 @@ public class SearchClass {                                                      
         try {                                                                                                           // Use f try & catch for Data missMatch errors
         System.out.print("|   Enter selection: ");                                                                      // Prompting the user for input for menu selection
         userIn_6 = searchNumber.nextInt();                                                                              // Storing user input in variable ' userIn_6 '
+        //System.out.println("|                     *    *    *                      |");                               // Display message for user end -
 
         switch (userIn_6) {
             case 1: {
@@ -57,8 +58,8 @@ public class SearchClass {                                                      
                     preparedStmt.setString(1, "%" + searchFor + "%");                                   // Setting parameters for DB search ' close too ' set string
                     rSet = preparedStmt.executeQuery();                                                                 // Executing SQL query
 
-                    System.out.println("|   Please see search results from the inventory table:   ");                   // Display user message
-                    System.out.println("* ---------------------------------------------------- *  ");                   // Display spacer
+                    System.out.println("|  Please see search results from the inventory table  | ");                    // Display user message
+                    System.out.println("* ---------------------------------------------------- * ");                    // Display spacer
 
                     while (rSet.next()) {                                                                               // Using a ' while ' loop to gather relevent info from table
                         item_ID = rSet.getInt("item_id");                                                    // Pulling information from the table and storing in variable ' item_ID '
@@ -87,7 +88,7 @@ public class SearchClass {                                                      
                         TransactionUpdate.Update(itemDesc, unitPrice, quantitySold, itemQuantity, oppTypeRead, outCome);         // Calling transactionUpdate.update() Method - To update database
 
                     } else {
-                        System.out.println("|        --- Failed to find record(s)! --- ");                              // Display user message
+                        System.out.println("|          --- Failed to find record(s)! ---           |");                 // Display user message
                         outCome = "FAIL";                                                                               // Variable to indicate Transaction fail
                         oppTypeRead = "Search Record";                                                                  // Variable to indicate Record Type Transaction
                         connection.close();                                                                             // Closing connection to free up resources to database
@@ -98,9 +99,8 @@ public class SearchClass {                                                      
                     System.out.println("| ");                                                                           // Display spacer
                     search();                                                                                           // calling search() Method to return to sub-menu
 
-                } catch (
-                        SQLException e) {                                                                               // In-case of try failure -
-                    System.out.println("|         --- Connection to database failed! ---      |");                      // Display message for user
+                } catch (SQLException e) {                                                                               // In-case of try failure -
+                    System.out.println("|         --- Connection to database failed! ---       |");                      // Display message for user
                     throw new RuntimeException(e);                                                                      // Exception thrown
                 }
                 search();                                                                                               // Return to seach() menu
@@ -122,7 +122,7 @@ public class SearchClass {                                                      
                     preparedStmt.setString(1, "%" + searchFor + "%");                                   // Setting parameters for search ' close too ' set string
                     rSet = preparedStmt.executeQuery();                                                                 // Executing SQL query
 
-                    System.out.println("| Please see search results from the Transaction Log's:  ");                    // Display user message
+                    System.out.println("| Please see search results from the Transaction Log's | ");                    // Display user message
                     System.out.println("* ---------------------------------------------------- * ");                    // Display spacer
 
                     while (rSet.next()) {                                                                               // Using a ' while ' loop to gather relevent info from table
@@ -146,7 +146,7 @@ public class SearchClass {                                                      
                     }
 
                     if (trnsID < 0) {                                                                                   // Using 'if' logic when record pull request was successful
-                        System.out.println("|  --- Failed to retrieve record! --- ");                                   // Display user message
+                        System.out.println("|          --- Failed to retrieve record! ---          |");                 // Display user message
                         outCome = "FAIL";                                                                               // Variable to indicate Transaction fail
                         oppTypeRead = "Search Record";                                                                  // Variable to indicate Record Type Transaction
                         connection.close();                                                                             // Closing connection to free up resources to database
@@ -165,7 +165,7 @@ public class SearchClass {                                                      
                     search();                                                                                           // calling search() Method to return to sub-menu
 */
                 } catch (SQLException e) {                                                                              // In-case of try failure -
-                    System.out.println("|   --- Connection to database failed! --- ");                                  // Display message for user
+                    System.out.println("|         --- Connection to database failed! ---       |");                     // Display message for user
                     throw new RuntimeException(e);                                                                      // Exception thrown
                 }
             }                                                                                                           // Switch case 2 end
@@ -177,14 +177,15 @@ public class SearchClass {                                                      
             }
 
             default:                                                                                                    // To catch any non-given options for use
-                System.out.print("Invalid selection, please try again");                                                // User display message
+                System.out.println("* ---------------------------------------------------- * ");
+                System.out.println("|      --- Invalid selection, please try again ---     |");                                                // User display message
                 search();                                                                                               // Return to search() main menu
                 break;
         }                                                                                                               // Switch statment end
 
-        } catch (
-                InputMismatchException e) {                                                                             // Catch block start -
-            System.out.print("   Please enter your choice using digets (1 - 3): ");                                     // Display message to user
+        } catch (InputMismatchException e) {                                                                             // Catch block start -
+            System.out.println("* ---------------------------------------------------- * ");                            // Display spacer
+            System.out.println("|  --- Please enter your choice using digets only ---  |");                             // Display message to user
             search();                                                                                                   // Restart & return to Delete() menu
         }
     }                                                                                                                   // End of main mathod

@@ -60,16 +60,17 @@ public class MainBuild {                                                        
                     System.exit(0);                                                                               // Code to terminate program
                 }
                 default: {                                                                                              // Default switch case is ALWAYS Executed
-                    System.out.println("Invalid answer, please try again! ");                                           // Triggers if a number > 6 is entered
+                    System.out.println("* ---------------------------------------------------- *");
+                    System.out.println("|      --- Invalid answer, please try again! ---       |");                                           // Triggers if a number > 6 is entered
                     MainBuild.home();                                                                                   // Restarts the main home() menu input again
                     break;                                                                                              // ' break ' out of switch statement
                 }
             }                                                                                                           // End of switch statement
 
         } catch(InputMismatchException e) {                                                                             // Catches error for incorrect data type input
-                e.printStackTrace(System.err);
-                System.out.println("Invailid charictor input, numbers only please!");                                   // Error message
-                MainBuild.home();                                                                                       // Restarts the main home() menu input again
+            System.out.println("* ---------------------------------------------------- * ");                            // Display spacer
+            System.out.println("|  --- Please enter your choice using digets only ---  |");                             // User message
+            MainBuild.home();                                                                                           // Restarts the main home() menu input again
         }
     }                                                                                                                   // End of Home Method
 }                                                                                                                       // End of MainBuild() Class

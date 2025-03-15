@@ -34,7 +34,6 @@ public class DeleteClass {                                                      
         try {
         System.out.print("|   Enter selection: ");                                                                      // Prompting the user for input
         userIn_5 = deleteNumber.nextInt();                                                                              // Storing user input in variable ' userIn_5 '
-        System.out.println("* ---------------------------------------------------- *");
 
         switch(userIn_5) {
             case 1: {
@@ -107,14 +106,15 @@ public class DeleteClass {                                                      
                     MainBuild.home();
             }                                                                                                           // Switch case 2 end
             default:
-                System.out.print("Invalid selection, please try again");
+                System.out.println("* ---------------------------------------------------- *");                         // Display spacer
+                System.out.println("|      --- Invalid selection, please try again ---     |");                         // User message
                 Delete();
                 break;
         }                                                                                                               // Switch statment end
 
-        } catch (
-                InputMismatchException e) {                                                                            // Catch block start -
-            System.out.print("   Please enter your choice using digets (1 - 3): ");                                     // Display message to user
+        } catch (InputMismatchException e) {                                                                            // Catch block start -
+            System.out.println("* ---------------------------------------------------- * ");                            // Display spacer
+            System.out.println("|  --- Please enter your choice using digets only ---  |");                             // User message
             Delete();                                                                                                   // Restart & return to Delete() menu
         }
 
